@@ -1,17 +1,18 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext } from "react";
-import { StyleSheet, View } from "react-native";
-import { Appbar } from "react-native-paper";
+import { FlatList, StyleSheet, View } from "react-native";
+import { Appbar, Text } from "react-native-paper";
 import CustomAppBar from "../components/CustomAppBar";
 import { ExpensesContext } from "../providers/ExpenseProvider";
+import ExpenseView from "../components/ExpenseView";
 
 const RecentExpenses = () => {
   const navigator = useNavigation();
   const { expenses } = useContext(ExpensesContext);
 
   return (
-    <View>
+    <View style={styles.root}>
       <CustomAppBar
         title={"Recent Expenses"}
         rightAction={
@@ -22,10 +23,25 @@ const RecentExpenses = () => {
           />
         }
       />
+      <View style={styles.body}>
+        <FlatList
+          data={expenses}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => <ExpenseView expense={item} />}
+        />
+      </View>
     </View>
   );
 };
 
 export default RecentExpenses;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+  body: {
+    flex: 1,
+    paddingHorizontal: 12,
+  },
+});

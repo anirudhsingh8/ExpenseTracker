@@ -21,7 +21,6 @@ const AddExpense = () => {
     setOpen(false);
   }, [setOpen]);
 
-
   const onDateSelected = React.useCallback(
     (params) => {
       setOpen(false);
@@ -31,8 +30,8 @@ const AddExpense = () => {
   );
 
   function handleButtonPress() {
-    if(title === "" || amount === "" || date === "") return;
-    
+    if (title === "" || amount === "" || date === "") return;
+
     const expense = new Expense({
       title: title,
       amount: amount,
@@ -55,30 +54,33 @@ const AddExpense = () => {
           />
         }
       />
-      <TextInput
-        style={styles.textfield}
-        mode="outlined"
-        label={"Title"}
-        value={title}
-        onChangeText={setTitle}
-      />
-      <TextInput
-        style={styles.textfield}
-        mode="outlined"
-        label={"Amount"}
-        value={amount}
-        onChangeText={setAmount}
-      />
-      <TextInput
-        style={styles.textfield}
-        mode="outlined"
-        label={"Date"}
-        value={date.toString()}
-        readOnly={true}
-        onPress={() => {setOpen(true)}}
-        onChangeText={setDate}
-      />
-      <DatePickerModal
+      <View style={styles.body}>
+        <TextInput
+          style={styles.textfield}
+          mode="outlined"
+          label={"Title"}
+          value={title}
+          onChangeText={setTitle}
+        />
+        <TextInput
+          style={styles.textfield}
+          mode="outlined"
+          label={"Amount"}
+          value={amount}
+          onChangeText={setAmount}
+        />
+        <TextInput
+          style={styles.textfield}
+          mode="outlined"
+          label={"Date"}
+          value={date.toString()}
+          readOnly={true}
+          onPress={() => {
+            setOpen(true);
+          }}
+          onChangeText={setDate}
+        />
+        <DatePickerModal
           mode="single"
           visible={open}
           saveLabel="Save"
@@ -87,28 +89,33 @@ const AddExpense = () => {
           date={date}
           onConfirm={onDateSelected}
         />
-      <TextInput
-        style={styles.textfield}
-        mode="outlined"
-        label={"Addtional notes"}
-        value={notes}
-        onChangeText={setNotes}
-      />
+        <TextInput
+          style={styles.textfield}
+          mode="outlined"
+          label={"Addtional notes"}
+          value={notes}
+          onChangeText={setNotes}
+        />
 
-      <Button
-        style={styles.button}
-        icon="plus"
-        mode="contained"
-        onPress={handleButtonPress}
-      >
-        Add Expense
-      </Button>
+        <Button
+          style={styles.button}
+          icon="plus"
+          mode="contained"
+          onPress={handleButtonPress}
+        >
+          Add Expense
+        </Button>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  body: {
+    flex: 1,
+    marginTop: 12,
     paddingHorizontal: 12,
   },
   textfield: {
