@@ -3,12 +3,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { PaperProvider } from "react-native-paper";
 import AddExpense from "./screens/AddExpense";
 import Home from "./screens/Home";
+import { ExpensesProvider } from "./providers/ExpenseProvider";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <>
+    <ExpensesProvider>
       <PaperProvider>
         <NavigationContainer>
           <Stack.Navigator>
@@ -29,6 +31,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
+      </ExpensesProvider>
     </>
   );
 }

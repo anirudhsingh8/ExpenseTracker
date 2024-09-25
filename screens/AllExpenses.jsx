@@ -14,6 +14,7 @@ const AllExpenses = () => {
         title={"All Expenses"}
         rightAction={
           <Appbar.Action
+            animated={false}
             icon={() => <MaterialCommunityIcons name="plus" size={24} />}
             onPress={() => navigator.navigate("Add")}
           />
