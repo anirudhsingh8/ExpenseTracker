@@ -8,7 +8,7 @@ import { ExpensesContext } from "../providers/ExpenseProvider";
 
 const RecentExpenses = () => {
   const navigator = useNavigation();
-  const { expenses, updateOrCreateExpenses } = useContext(ExpensesContext);
+  const { expenses } = useContext(ExpensesContext);
 
   return (
     <View>
