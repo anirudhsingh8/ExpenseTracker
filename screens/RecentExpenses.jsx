@@ -9,7 +9,7 @@ import ExpenseView from "../components/ExpenseView";
 
 const RecentExpenses = () => {
   const navigator = useNavigation();
-  const { expenses } = useContext(ExpensesContext);
+  const { recentExpenses } = useContext(ExpensesContext);
 
   return (
     <View style={styles.root}>
@@ -23,9 +23,10 @@ const RecentExpenses = () => {
           />
         }
       />
+      <Text style={styles.header}>Showing expenses of last 7 days</Text>
       <View style={styles.body}>
         <FlatList
-          data={expenses}
+          data={recentExpenses}
           keyExtractor={item => item.id}
           renderItem={({item}) => <ExpenseView expense={item} />}
         />
@@ -39,6 +40,12 @@ export default RecentExpenses;
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  header: {
+    paddingVertical:8,
+    paddingLeft: 24,
+    fontWeight: '800',
+    fontSize: 22,
   },
   body: {
     flex: 1,

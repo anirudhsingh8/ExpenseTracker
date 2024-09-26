@@ -1,11 +1,23 @@
 import React, { createContext, useEffect, useState } from "react";
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
 import Expense from "../models/Expense";
 
 export const ExpensesContext = createContext();
 
 export const ExpensesProvider = ({ children }) => {
+  const recentDayFactor = 7;
+  const [recentExpenses, setRecentExpenses] = useState([]);
   const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    const now = new Date();
+    const recentDate = new Date(now);
+    recentDate.setDate(now.getDate() - recentDayFactor);
+
+    setRecentExpenses(
+      expenses.filter((expense) => new Date(expense.date) >= recentDate)
+    );
+  }, [expenses]);
 
   useEffect(() => {
     setExpenses([
@@ -42,7 +54,7 @@ export const ExpensesProvider = ({ children }) => {
   }
 
   return (
-    <ExpensesContext.Provider value={{ expenses, updateOrCreateExpenses }}>
+    <ExpensesContext.Provider value={{ recentExpenses, expenses, updateOrCreateExpenses }}>
       {children}
     </ExpensesContext.Provider>
   );
